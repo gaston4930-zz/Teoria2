@@ -1,13 +1,11 @@
 package lang;
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
 
 import java_cup.runtime.*;
 import lang.parser.*;
 
-/** Implementaciï¿½n del lenguaje con la siguiente gramï¿½tica:
+/** Implementación del lenguaje con la siguiente gramática:
 
 ```
 lines : lines line ;
@@ -44,17 +42,14 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 		BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
 		StringBuilder source = new StringBuilder();
-		//System.out.println(new Boolean("true"));
 		for (String line = stdIn.readLine(); line != null; line = stdIn.readLine()) {
 			if (line.length() > 0) {
 				source.append(line).append("\n");
 			} else { // Empty line means input ends.
-				showTokens(source.toString());
+				//showTokens(source.toString());
 				showParse(source.toString());
-//				source = new StringBuilder();
 			}
 		}
-		Map<String, Boolean> map = new HashMap<>();
 	}
 
 }

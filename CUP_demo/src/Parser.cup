@@ -1,0 +1,43 @@
+package lang.parser;
+
+import java.io.*;
+import java.util.*;
+import java_cup.runtime.Symbol;
+
+parser code {:
+	
+	public static Lexer makeLexer(String input) throws Exception {
+		return new Lexer(new StringReader(input));
+	}
+	
+	public static Parser makeParser(String input) throws Exception {
+		return new Parser(makeLexer(input));
+	}
+	
+	public static Object parseString(String input) throws Exception {
+		Parser parser = Parser.makeParser(input);
+		Symbol result = parser.parse();
+		return result.value;
+	}
+	
+:}
+
+// Rules
+
+terminal EOL, COMMA;
+terminal Integer NUM;
+non terminal List lines, line, nums;
+
+lines ::= line:l
+		{: RESULT = new ArrayList(); RESULT.add(l); :}
+	|	lines:ls line:l
+		{: RESULT = ls; ls.add(l); :}
+	;
+line ::= nums:ns EOL
+		{: RESULT = ns; :}
+	;
+nums ::= NUM:n
+		{: RESULT = new ArrayList(); RESULT.add(n); :}
+	| nums:ns COMMA NUM:n
+		{: RESULT = ns; ns.add(n); :}
+	;
