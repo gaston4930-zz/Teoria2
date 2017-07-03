@@ -8,18 +8,35 @@ import java_cup.runtime.Symbol;
 %cupsym Tokens
 %cup
 %implements Tokens
-%public 
+%public
 
-%{ 
-	/* Embedded lexer class code */  
+%{
+	/* Embedded lexer class code */
 %}
 
 %% 
 // Tokens.
 
-[0-9]+	{ return new Symbol(NUM, Integer.parseInt(yytext())); }
-\r?\n	{ return new Symbol(EOL); }
-,		{ return new Symbol(COMMA); }
+[A-Z][a-zA-Z0-9.]* { return new Symbol(tag, yytext()); }
+[a-z][a-zA-Z0-9.]* { return new Symbol(id, yytext()); }
+\"([^\"\n])*\" { return new Symbol(string, yytext()); }
+(true|false|⊤|⊥|null) { return new Symbol(boolean, yytext()); }
+[-+]?[0-9]*(\.[0-9]+)? { return new Symbol(num, Float.parseFloat(yytext())); }
+\( { return new Symbol(P1); }
+\) { return new Symbol(P2); }
+: { return new Symbol(COLON); }
+, { return new Symbol(COMMA); }
+
+& { return new Symbol(INTERSECTION); }
+\| { return new Symbol(UNION);}
+\+ { return new Symbol(CONCATENATION); }
+- { return new Symbol(DIFFERENCE); }
+~.+ { return new Symbol(FILTER); }
+\. { return new Symbol(ATTRIBUTES); }
+\/ { return new Symbol(ELEMENTS); }
+
+\/\/.* {}
+[ \r\n\t]+ { }
 
 .	{ /* Fallback */
 		return new Symbol(error, "Unexpected input <"+ yytext() +">!"); 
