@@ -24,7 +24,11 @@ parser code {:
 
 // Rules
 
-terminal EOL, COMMA;
+terminal P1, P2, COLON, COMMA;
+terminal INTERSECTION, UNION,
+		 CONCATENATION, DIFFERENCE,
+		 FILTER, ATTRIBUTES, ELEMENTS;
+terminal EOL;
 terminal Integer NUM;
 non terminal List lines, line, nums;
 
