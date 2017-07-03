@@ -8,6 +8,7 @@ import java_cup.runtime.Symbol;
 %cupsym Tokens
 %cup
 %implements Tokens
+%public 
 
 %{ 
 	/* Embedded lexer class code */  
