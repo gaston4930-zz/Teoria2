@@ -4,13 +4,23 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class Objeto {
-	String id;
-	Map<String,String> attributes;
-	ArrayList<String> elements;
-	public Objeto(String id, Map<String,String> att,
-			ArrayList<String> elem) {
+	private String id;
+	private Map<String,Valor> attributes;
+	private ArrayList<Valor> elements;
+
+	public Objeto(){
+		elements = new ArrayList<Valor>();
+	}
+	
+	public void setId(String id){
 		this.id = id;
-		attributes = att;
-		elements = elem;
+	}
+	
+	public void addAtt(String id, Valor val){
+		attributes.put(id, val);
+	}
+	
+	public void addElem(Valor elem){
+		elements.add(elem);
 	}
 }

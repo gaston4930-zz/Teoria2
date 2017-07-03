@@ -30,6 +30,7 @@ terminal INTERSECTION, UNION,
 		 CONCATENATION, DIFFERENCE,
 		 FILTER, ATTRIBUTES, ELEMENTS;
 terminal Float num;
+terminal String id;
 terminal String string;
 terminal Boolean boolean;
 terminal Map attributes;
@@ -37,12 +38,15 @@ terminal List elements;
 terminal Objeto obj;
 
 non terminal valor;
-non terminal lista
+non terminal lista;
 
 obj ::= id:i P1 lista:l P2
-		{::}
+		{: RESULT = new Objeto(i); RESULT.:}
 		;
-
+lista ::= id:i COLON valor:v 
+			{: RESULT = new Objeto(); RESULT.addAtt(i,v); :}
+		| valor:v {: RESULT = new Objeto(); RESULT.addElem(v); :}
+		;
 valor ::= string:s {: RESULT = s; :}
 		| num:n {: RESULT = n; :}
 		| boolean:b {: RESULT = b; :}
