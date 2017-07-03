@@ -3,6 +3,7 @@ package lang.parser;
 import java.io.*;
 import java.util.*;
 import java_cup.runtime.Symbol;
+import ast.*;
 
 parser code {:
 	
@@ -28,20 +29,21 @@ terminal P1, P2, COLON, COMMA;
 terminal INTERSECTION, UNION,
 		 CONCATENATION, DIFFERENCE,
 		 FILTER, ATTRIBUTES, ELEMENTS;
-terminal EOL;
-terminal Integer NUM;
-non terminal List lines, line, nums;
+terminal Float num;
+terminal String string;
+terminal Boolean boolean;
+terminal Map attributes;
+terminal List elements;
+terminal Objeto obj;
 
-lines ::= line:l
-		{: RESULT = new ArrayList(); RESULT.add(l); :}
-	|	lines:ls line:l
-		{: RESULT = ls; ls.add(l); :}
-	;
-line ::= nums:ns EOL
-		{: RESULT = ns; :}
-	;
-nums ::= NUM:n
-		{: RESULT = new ArrayList(); RESULT.add(n); :}
-	| nums:ns COMMA NUM:n
-		{: RESULT = ns; ns.add(n); :}
-	;
+non terminal valor;
+non terminal lista
+
+obj ::= id:i P1 lista:l P2
+		{::}
+		;
+
+valor ::= string:s {: RESULT = s; :}
+		| num:n {: RESULT = n; :}
+		| boolean:b {: RESULT = b; :}
+		;

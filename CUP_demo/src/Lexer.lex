@@ -7,7 +7,7 @@ import java_cup.runtime.Symbol;
 %class Lexer
 %cupsym Tokens
 %cup
-%implements Tokens
+%implements Tokens 
 %public
 
 %{
@@ -17,8 +17,7 @@ import java_cup.runtime.Symbol;
 %% 
 // Tokens.
 
-[A-Z][a-zA-Z0-9.]* { return new Symbol(tag, yytext()); }
-[a-z][a-zA-Z0-9.]* { return new Symbol(id, yytext()); }
+[A-Za-z][a-zA-Z0-9.]* { return new Symbol(id, yytext()); }
 \"([^\"\n])*\" { return new Symbol(string, yytext()); }
 (true|false|⊤|⊥|null) { return new Symbol(boolean, yytext()); }
 [-+]?[0-9]*(\.[0-9]+)? { return new Symbol(num, Float.parseFloat(yytext())); }
