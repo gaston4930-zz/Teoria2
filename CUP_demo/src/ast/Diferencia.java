@@ -2,29 +2,37 @@ package ast;
 
 import java.util.ArrayList;
 
-public class Diferencia extends Expression{
+public class Diferencia extends Expresion{
 
-ArrayList<Objeto> l1,l2;
+	Expresion e1,e2;
+	ArrayList<Object> resultado;	
 	
-	
-	public Diferencia(ArrayList<Objeto> l1, ArrayList<Objeto> l2){
-		this.l1 = l1;
-		this.l2 = l2;
+	public Diferencia(Expresion e1, Expresion e2){
+		this.e1 = e1;
+		this.e2 = e2;
+		resultado = new ArrayList();
 	}
 	
-	public ArrayList<Object> getList(){
-		ArrayList<Object> resultado = new ArrayList();
+	public void eval(){
+						
+		/*for(Objeto o1 : l1){
+			resultado.add(o1);
+		}
 		
-		resultado.addAll(l1);
-		resultado.removeAll(l2);
+		for(Objeto o2 : l2){
+			resultado.add(o2);
+		}*/
+		
+		resultado.addAll(e1.getExpresion());
+		resultado.removeAll(e2.getExpresion());
 		
 		for(int i =0;i<resultado.size();i++){
 			if(resultado.subList(i+1, resultado.size()-1).contains(resultado.get(i))){
 				resultado.remove(i);
 			}
 		}
-		
-		return resultado;
 	}
+		
+	
 	
 }

@@ -1,18 +1,20 @@
 package ast;
 
+import java.beans.Expression;
 import java.util.ArrayList;
 
-public class Concatenacion extends Expression{
+public class Concatenacion extends Expresion{
 
-	ArrayList<Objeto> l1,l2;
-		
-	public Concatenacion(ArrayList<Objeto> l1, ArrayList<Objeto> l2){
-		this.l1 = l1;
-		this.l2 = l2;
+	Expresion e1,e2;
+	ArrayList<Object> resultado;	
+	
+	public Concatenacion(Expresion e1, Expresion e2){
+		this.e1 = e1;
+		this.e2 = e2;
+		resultado = new ArrayList();
 	}
 	
-	public ArrayList<Object> getList(){
-		ArrayList<Object> resultado = new ArrayList();
+	public void eval(){
 						
 		/*for(Objeto o1 : l1){
 			resultado.add(o1);
@@ -22,10 +24,8 @@ public class Concatenacion extends Expression{
 			resultado.add(o2);
 		}*/
 		
-		resultado.addAll(l1);
-		resultado.addAll(l2);
-		
-		return resultado;
+		resultado.addAll(e1.getExpresion());
+		resultado.addAll(e2.getExpresion());
 	}
 	
 }

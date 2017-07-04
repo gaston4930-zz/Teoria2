@@ -2,25 +2,32 @@ package ast;
 
 import java.util.ArrayList;
 
-public class Interseccion extends Expression{
-ArrayList<Objeto> l1,l2;
+public class Interseccion extends Expresion{
+	Expresion e1,e2;
+	ArrayList<Object> resultado;	
 	
-	
-	public Interseccion(ArrayList<Objeto> l1, ArrayList<Objeto> l2){
-		this.l1 = l1;
-		this.l2 = l2;
+	public Interseccion(Expresion e1, Expresion e2){
+		this.e1 = e1;
+		this.e2 = e2;
+		resultado = new ArrayList();
 	}
 	
-	public ArrayList<Object> getList(){
-		ArrayList<Object> resultado = new ArrayList();
+	public void eval(){
+						
+		/*for(Objeto o1 : l1){
+			resultado.add(o1);
+		}
 		
-		for(Objeto o : l1){
-			if(l2.contains(o)){
+		for(Objeto o2 : l2){
+			resultado.add(o2);
+		}*/
+		
+		for(Object o : e1.getExpresion()){
+			if(e2.getExpresion().contains(o)){
 				resultado.add(o);
 			}
 		}
-		
-		return resultado;
 	}
+
 	
 }

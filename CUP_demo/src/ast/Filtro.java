@@ -2,43 +2,42 @@ package ast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
-public class Filtro extends Expression{
+public class Filtro extends Expresion{
 
-	ArrayList<Object> expression;
+	Expresion expression;
 	boolean regex = true;
 	String filtro;
-	
-	public Filtro(ArrayList<Object> expression,String filtro){
+
+	public Filtro(Expresion expression,String filtro){
 		this.expression = expression;
 		this.regex = filtro.substring(0,1).equals("~");
 		if(regex){
 			filtro = filtro.substring(1);
 		}
-		
+
 		if(filtro.substring(0,1).equals("\"")){
 			filtro = filtro.substring(1,filtro.length()); 
 		}
 		this.filtro = filtro;
 	}
-	
-	public ArrayList<Object> getList(){
+
+	public ArrayList<Object> eval(){
 		ArrayList<Object> resultado = new ArrayList();
-		if(!regex){
-			for(Object o : expression){
-				if(o instanceof HashMap){
-					HashMap oH = (HashMap)o;
-					if(oH.containsKey(filtro)){
-						resultado.add(o);
-					}
-				}else{
-					if( o instanceof Objeto){
-						
+			for(Object o : expression.getExpresion()){
+				if( o instanceof Objeto){
+					if(regex){
+						if(((Objeto) o).getId().matches(filtro)){
+							resultado.add(o);
+						}
+					}else{
+						if(((Objeto) o).getId().equals(filtro)){
+							resultado.add(o);
+						}
 					}
 				}
 			}
-		}
-		
 		return resultado;
 	}
 
