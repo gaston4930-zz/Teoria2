@@ -5,7 +5,7 @@ import java.io.*;
 import java_cup.runtime.*;
 import lang.parser.*;
 
-/** Implementación del lenguaje con la siguiente gramática:
+/** Implementaciï¿½n del lenguaje con la siguiente gramï¿½tica:
 
 ```
 lines : lines line ;
@@ -46,7 +46,7 @@ public class Main {
 			if (line.length() > 0) {
 				source.append(line).append("\n");
 			} else { // Empty line means input ends.
-				//showTokens(source.toString());
+				showTokens(source.toString());
 				showParse(source.toString());
 			}
 		}

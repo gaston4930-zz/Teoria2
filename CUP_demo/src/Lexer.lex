@@ -17,10 +17,10 @@ import java_cup.runtime.Symbol;
 %% 
 // Tokens.
 
+(true|false) { return new Symbol(bool, yytext() == "true"); }
 [A-Za-z][a-zA-Z0-9.]* { return new Symbol(id, yytext()); }
-\"([^\"\n])*\" { return new Symbol(string, yytext()); }
-(true|false|null) { return new Symbol(boolean, yytext()); }
-[-+]?[0-9]*(\.[0-9]+)? { return new Symbol(num, Float.parseFloat(yytext())); }
+\"([^"\n\\]|\\[^\n])*\" { return new Symbol(str, yytext()); }
+[-+]?[0-9]+(\.[0-9]+)? { return new Symbol(num, Float.parseFloat(yytext())); }
 \( { return new Symbol(P1); }
 \) { return new Symbol(P2); }
 : { return new Symbol(COLON); }
@@ -29,13 +29,13 @@ import java_cup.runtime.Symbol;
 & { return new Symbol(INTERSECTION); }
 \| { return new Symbol(UNION);}
 \+ { return new Symbol(CONCATENATION); }
-- { return new Symbol(DIFFERENCE); }
-~.+ { return new Symbol(FILTER); }
+\- { return new Symbol(DIFFERENCE); }
+\~.+ { return new Symbol(FILTER); }
 \. { return new Symbol(ATTRIBUTES); }
 \/ { return new Symbol(ELEMENTS); }
 
 \/\/.* {}
-[ \r\n\t]+ { }
+[ \r\n\t]+ {}
 
 .	{ /* Fallback */
 		return new Symbol(error, "Unexpected input <"+ yytext() +">!"); 

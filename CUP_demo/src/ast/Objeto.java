@@ -4,16 +4,12 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class Objeto {
-	private String id;
-	private Map<String,Valor> attributes;
-	private ArrayList<Valor> elements;
+	String id;
+	Map<String,Object> attributes;
+	ArrayList<Valor> elements;
 
 	public Objeto(){
 		elements = new ArrayList<Valor>();
-	}
-	
-	public void setId(String id){
-		this.id = id;
 	}
 	
 	public void addAtt(String id, Valor val){
@@ -22,5 +18,9 @@ public class Objeto {
 	
 	public void addElem(Valor elem){
 		elements.add(elem);
+	}
+	
+	public void setTag(String str){
+		id = str;
 	}
 }
