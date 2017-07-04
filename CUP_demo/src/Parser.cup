@@ -37,12 +37,15 @@ terminal Float num;
 terminal String id;
 terminal String str;
 terminal Boolean bool;
+terminal String fil;
 
 non terminal Objeto obj;
 non terminal Objeto lista;
 non terminal Objeto root;
 
 non terminal Object valor;
+
+non terminal List expresion;
 
 root ::= obj:o EOL {: RESULT = new Objeto("root"); RESULT.addElem(o); :}
 		| root:r obj:o EOL {: RESULT = r; RESULT.addElem(o); :}
@@ -64,3 +67,20 @@ valor ::= bool:b {: RESULT = b; :}
 		| str:s {: RESULT = s; :}
 		| obj:o {: RESULT = o; :}
 		;
+expresion ::= valor:v {: RESULT = new ArrayList(); RESULT.add(v); :}
+			| P1 expresion:e P2 {: RESULT = e; :}
+			| expresion:e1 INTERSECCION expresion:e2 
+				{: RESULT = Interseccion(e1,e2).getList(); :}
+			| expresion:e1 UNION expresion:e2 
+				{: RESULT = Union(e1,e2).getList(); :}
+			| expresion:e1 CONCATENACION expresion:e2
+				{: RESULT = Concatenacion(e1,e2).getList(); :}
+			| expresion:e1 DIFERENCIA expresion:e2
+				{: RESULT = Diferencia(e1,e2).getList(); :}
+			| expresion:e FILTRO fil 
+				{: RESULT = Filtro(e1,fil).getList(); :}
+			| expresion:e ATTRIBUTES 
+				{: RESULT = Attributes(e).getList(); :}
+			| expresion:e ELEMENTS
+				{: RESULT = Elements(e).getList(); :}
+			;
