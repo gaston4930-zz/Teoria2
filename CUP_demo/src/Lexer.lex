@@ -18,6 +18,7 @@ import java_cup.runtime.Symbol;
 // Tokens.
 
 (true|false) { return new Symbol(bool, yytext() == "true"); }
+([A-Za-z][a-zA-Z0-9]*|\"[A-Za-z][a-zA-Z0-9.]*\") { return new Symbol(fil, yytext()); }
 [A-Za-z][a-zA-Z0-9.]* { return new Symbol(id, yytext()); }
 \"([^\"\n\\]|\\[^\n])*\" { return new Symbol(str, yytext()); }
 [-+]?[0-9]+(\.[0-9]+)? { return new Symbol(num, Float.parseFloat(yytext())); }
