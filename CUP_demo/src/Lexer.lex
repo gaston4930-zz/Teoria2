@@ -25,6 +25,7 @@ import java_cup.runtime.Symbol;
 \) { return new Symbol(P2); }
 : { return new Symbol(COLON); }
 , { return new Symbol(COMMA); }
+\n { return new Symbol(EOL); }
 
 & { return new Symbol(INTERSECTION); }
 \| { return new Symbol(UNION);}
@@ -35,7 +36,7 @@ import java_cup.runtime.Symbol;
 \/ { return new Symbol(ELEMENTS); }
 
 \/\/.* {}
-[ \r\n\t]+ {}
+[ \r\t]+ {}
 
 .	{ /* Fallback */
 		return new Symbol(error, "Unexpected input <"+ yytext() +">!"); 
