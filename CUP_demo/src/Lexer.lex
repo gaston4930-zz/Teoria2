@@ -27,11 +27,11 @@ import java_cup.runtime.Symbol;
 , { return new Symbol(COMMA); }
 \n { return new Symbol(EOL); }
 
-& { return new Symbol(INTERSECTION); }
+& { return new Symbol(INTERSECCION); }
 \| { return new Symbol(UNION);}
-\+ { return new Symbol(CONCATENATION); }
-\- { return new Symbol(DIFFERENCE); }
-\~.+ { return new Symbol(FILTER); }
+\+ { return new Symbol(CONCATENACION); }
+\- { return new Symbol(DIFERENCIA); }
+\~.+ { return new Symbol(FILTRO); }
 \. { return new Symbol(ATTRIBUTES); }
 \/ { return new Symbol(ELEMENTS); }
 
