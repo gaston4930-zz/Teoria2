@@ -6,17 +6,19 @@ import java.util.Map;
 public class Objeto {
 	String id;
 	Map<String,Object> attributes;
-	ArrayList<Valor> elements;
+	ArrayList<Object> elements;
 
 	public Objeto(){
-		elements = new ArrayList<Valor>();
+		elements = new ArrayList<Object>();
 	}
 	
-	public void addAtt(String id, Valor val){
-		attributes.put(id, val);
+	public void addAttr(String id, Object val){
+		attributes.put(
+				id,
+				val);
 	}
 	
-	public void addElem(Valor elem){
+	public void addElem(Object elem){
 		elements.add(elem);
 	}
 	

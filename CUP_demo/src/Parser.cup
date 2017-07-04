@@ -39,11 +39,11 @@ terminal Boolean bool;
 
 non terminal Objeto obj;
 non terminal Objeto lista;
-non terminal Valor valor;
+non terminal Object valor;
 
 obj ::= id:tag P1 lista:l P2 
-			{: RESULT = l; RESULT.addId(tag); :}
-		| id:tag P1 P2 {: RESULT = new Objeto(); RESULT.addId(tag); :}
+			{: RESULT = l; RESULT.setTag(tag); :}
+		| id:tag P1 P2 {: RESULT = new Objeto(); RESULT.setTag(tag); :}
 		;
 lista ::= id:i COLON valor:v 
 			{: RESULT = new Objeto(); RESULT.addAttr(i,v); :}
@@ -53,8 +53,8 @@ lista ::= id:i COLON valor:v
 		| lista:l COMMA valor:v 
 			{: RESULT = l; RESULT.addElem(v); :}
 		;
-valor ::= bool:b {: RESULT = new Valor(b); :}
-		| num:n {: RESULT = new Valor(n); :}
-		| str:s {: RESULT = new Valor(s); :}
-		| obj:o {: RESULT = new Valor(o); :}
+valor ::= bool:b {: RESULT = b; :}
+		| num:n {: RESULT = n; :}
+		| str:s {: RESULT = s; :}
+		| obj:o {: RESULT = o; :}
 		;

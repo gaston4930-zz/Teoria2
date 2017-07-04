@@ -19,7 +19,7 @@ import java_cup.runtime.Symbol;
 
 (true|false) { return new Symbol(bool, yytext() == "true"); }
 [A-Za-z][a-zA-Z0-9.]* { return new Symbol(id, yytext()); }
-\"([^"\n\\]|\\[^\n])*\" { return new Symbol(str, yytext()); }
+\"([^\"\n\\]|\\[^\n])*\" { return new Symbol(str, yytext()); }
 [-+]?[0-9]+(\.[0-9]+)? { return new Symbol(num, Float.parseFloat(yytext())); }
 \( { return new Symbol(P1); }
 \) { return new Symbol(P2); }
