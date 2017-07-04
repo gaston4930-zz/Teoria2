@@ -40,12 +40,12 @@ terminal Boolean bool;
 
 non terminal Objeto obj;
 non terminal Objeto lista;
-non terminal Object valor;
-non terminal List root;
+non terminal Objeto root;
 
-root ::= obj:o EOL {: RESULT = new ArrayList(); RESULT.add(o); :}
-		| root:r COMMA obj:o EOL {: RESULT = r; RESULT.add(o); :}
-		| root:r obj:o EOL {: RESULT = r; RESULT.add(o); :}
+non terminal Object valor;
+
+root ::= obj:o EOL {: RESULT = new Objeto("root"); RESULT.addElem(o); :}
+		| root:r obj:o EOL {: RESULT = r; RESULT.addElem(o); :}
 		;
 obj ::= id:tag P1 lista:l P2 
 			{: RESULT = l; RESULT.setTag(tag); :}
