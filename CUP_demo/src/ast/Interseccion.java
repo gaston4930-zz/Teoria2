@@ -2,7 +2,7 @@ package ast;
 
 import java.util.ArrayList;
 
-public class Interseccion {
+public class Interseccion extends Expression{
 ArrayList<Objeto> l1,l2;
 	
 	

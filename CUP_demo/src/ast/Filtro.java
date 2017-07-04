@@ -3,7 +3,7 @@ package ast;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Filtro {
+public class Filtro extends Expression{
 
 	ArrayList<Object> expression;
 	boolean regex = true;

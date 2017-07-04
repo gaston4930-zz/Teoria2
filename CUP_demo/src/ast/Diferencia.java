@@ -2,7 +2,7 @@ package ast;
 
 import java.util.ArrayList;
 
-public class Diferencia {
+public class Diferencia extends Expression{
 
 ArrayList<Objeto> l1,l2;
 	
