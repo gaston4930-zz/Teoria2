@@ -1,8 +1,6 @@
 package ast;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Set;
 
 public class Filtro extends Expresion{
 
@@ -24,7 +22,7 @@ public class Filtro extends Expresion{
 	}
 
 	public ArrayList<Object> eval(){
-		ArrayList<Object> resultado = new ArrayList();
+		ArrayList<Object> resultado = new ArrayList<Object>();
 			for(Object o : expression.getExpresion()){
 				if( o instanceof Objeto){
 					if(regex){

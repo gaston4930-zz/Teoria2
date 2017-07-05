@@ -56,7 +56,7 @@ public class Objeto {
 		return res;
 	}
 	
-	public ArrayList getElements(){
+	public ArrayList<Object> getElements(){
 		return elements;
 	}
 	

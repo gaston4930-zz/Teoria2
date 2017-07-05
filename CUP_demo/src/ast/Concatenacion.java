@@ -1,6 +1,5 @@
 package ast;
 
-import java.beans.Expression;
 import java.util.ArrayList;
 
 public class Concatenacion extends Expresion{
@@ -11,7 +10,7 @@ public class Concatenacion extends Expresion{
 	public Concatenacion(Expresion e1, Expresion e2){
 		this.e1 = e1;
 		this.e2 = e2;
-		resultado = new ArrayList();
+		resultado = new ArrayList<Object>();
 	}
 	
 	public void eval(){

@@ -63,20 +63,20 @@ valor ::= bool:b {: RESULT = b; :}
 		| str:s {: RESULT = s; :}
 		| obj:o {: RESULT = o; :}
 		;
-expresion ::= valor:v {: RESULT = new ArrayList(); RESULT.add(v); :}
+expresion ::= valor:v {: RESULT = new Expresion(v); :}
 			| P1 expresion:e P2 {: RESULT = e; :}
 			| expresion:e1 INTERSECCION expresion:e2 
-				{: RESULT = Interseccion(e1,e2); :}
+				{: RESULT = new Interseccion(e1,e2); :}
 			| expresion:e1 UNION expresion:e2 
-				{: RESULT = Union(e1,e2); :}
+				{: RESULT = new Union(e1,e2); :}
 			| expresion:e1 CONCATENACION expresion:e2
-				{: RESULT = Concatenacion(e1,e2); :}
+				{: RESULT = new Concatenacion(e1,e2); :}
 			| expresion:e1 DIFERENCIA expresion:e2
-				{: RESULT = Diferencia(e1,e2); :}
-			| expresion:e FILTRO fil 
-				{: RESULT = Filtro(e1,fil); :}
+				{: RESULT = new Diferencia(e1,e2); :}
+			| expresion:e FILTRO fil:f 
+				{: RESULT = new Filtro(e,f); :}
 			| expresion:e ATTRIBUTES 
-				{: RESULT = Attributes(e); :}
+				{: RESULT = new Attributes(e); :}
 			| expresion:e ELEMENTS
-				{: RESULT = Elements(e); :}
+				{: RESULT = new Elements(e); :}
 			;

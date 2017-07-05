@@ -10,6 +10,11 @@ public class Expresion {
 		
 	}
 	
+	public Expresion(Object o){
+		expression = new ArrayList<>();
+		expression.add(o);
+	}
+	
 	public Expresion(ArrayList<Object> expression){
 		this.expression = expression;
 	}
