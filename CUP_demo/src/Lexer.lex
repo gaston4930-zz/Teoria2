@@ -17,7 +17,7 @@ import java_cup.runtime.Symbol;
 %% 
 // Tokens.
 
-(true|false) { return new Symbol(bool, yytext() == "true"); }
+(true|false|\u22A4|\u22A5) { return new Symbol(bool, yytext() == "true"); }
 ([A-Za-z][a-zA-Z0-9]*|\"[A-Za-z][a-zA-Z0-9.]*\") { return new Symbol(fil, yytext()); }
 [A-Za-z][a-zA-Z0-9.]* { return new Symbol(id, yytext()); }
 \"([^\"\n\\]|\\[^\n])*\" { return new Symbol(str, yytext()); }
@@ -27,14 +27,16 @@ import java_cup.runtime.Symbol;
 : { return new Symbol(COLON); }
 , { return new Symbol(COMMA); }
 \n { return new Symbol(EOL); }
+-?\u221e { return new Symbol(INF); }
 
-& { return new Symbol(INTERSECCION); }
-\| { return new Symbol(UNION);}
+(&|\u2229) { return new Symbol(INTERSECCION); }
+(\||\u222A) { return new Symbol(UNION);}
 \+ { return new Symbol(CONCATENACION); }
 \- { return new Symbol(DIFERENCIA); }
 \~.+ { return new Symbol(FILTRO); }
 \. { return new Symbol(ATTRIBUTES); }
 \/ { return new Symbol(ELEMENTS); }
+
 
 \/\/.* {}
 [ \r\t]+ {}

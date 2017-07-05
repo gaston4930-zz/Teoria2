@@ -28,7 +28,7 @@ parser code {:
 terminal P1, P2, COLON, COMMA, EOL;
 terminal INTERSECCION, UNION,
 		 CONCATENACION, DIFERENCIA,
-		 FILTRO, ATTRIBUTES, ELEMENTS;
+		 FILTRO, ATTRIBUTES, ELEMENTS, INF;
 terminal Float num;
 terminal String id;
 terminal String str;
@@ -38,6 +38,7 @@ terminal String fil;
 non terminal Objeto obj;
 non terminal Objeto lista;
 non terminal Objeto root;
+
 
 non terminal Object valor;
 
@@ -63,8 +64,9 @@ valor ::= bool:b {: RESULT = b; :}
 		| str:s {: RESULT = s; :}
 		| obj:o {: RESULT = o; :}
 		;
+		
 expresion ::= valor:v {: RESULT = new Expresion(v); :}
-			| P1 expresion:e P2 {: RESULT = e; :}
+			| P1 expresion:e1 P2 {: RESULT = e1; :}	//No le gusta esta línea con P1 y P2
 			| expresion:e1 INTERSECCION expresion:e2 
 				{: RESULT = new Interseccion(e1,e2); :}
 			| expresion:e1 UNION expresion:e2 

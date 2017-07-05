@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Expresion {
 
-	ArrayList<Object> expression;
+	private ArrayList<Object> expression;
 	
 	public Expresion(){
 		
@@ -13,10 +13,7 @@ public class Expresion {
 	public Expresion(Object o){
 		expression = new ArrayList<>();
 		expression.add(o);
-	}
-	
-	public Expresion(ArrayList<Object> expression){
-		this.expression = expression;
+		System.out.println("New expresion: "+expression.size());
 	}
 	
 	public ArrayList<Object> getExpresion(){
