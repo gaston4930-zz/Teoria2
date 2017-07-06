@@ -28,7 +28,7 @@ parser code {:
 terminal P1, P2, COLON, COMMA, EOL;
 terminal INTERSECCION, UNION,
 		 CONCATENACION, DIFERENCIA,
-		 FILTRO, ATTRIBUTES, ELEMENTS, INF;
+		 FILTRO, ATTRIBUTES, ELEMENTS;
 terminal Float num;
 terminal String id;
 terminal String str;
@@ -37,15 +37,18 @@ terminal String fil;
 
 non terminal Nodo obj;
 non terminal Nodo lista;
-non terminal Nodo root;
-
 
 non terminal Object valor;
 
+non terminal Expresion root;
 non terminal Expresion expresion;
 
-root ::= obj:o EOL {: RESULT = new Nodo("root"); RESULT.addElem(o); :}
-		| root:r obj:o EOL {: RESULT = r; RESULT.addElem(o); :}
+precedence left ELEMENTS, ATTRIBUTES;
+precedence left UNION, CONCATENACION,
+			DIFERENCIA, INTERSECCION;
+precedence left P1, P2;
+
+root ::= expresion:e EOL {: RESULT = e; :}
 		;
 obj ::= id:tag P1 lista:l P2 
 			{: RESULT = l; RESULT.setTag(tag); :}

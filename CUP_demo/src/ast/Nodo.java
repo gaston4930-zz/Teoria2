@@ -27,10 +27,10 @@ public class Nodo {
 		elements.add(elem);
 	}
 	
-	public void addList(Nodo n){
+	public void addList(Nodo nodo){
 		// Agrega todos los elementos y atributos
-		this.elements.addAll(n.getElements());
-		this.attributes.putAll(n.getAttributes());
+		this.elements.addAll(nodo.getElements());
+		this.attributes.putAll(nodo.getAttributes());
 	}
 	
 	public void setTag(String str){
@@ -46,18 +46,21 @@ public class Nodo {
 	}
 	
 	public String at(){
-		String res = "";
-		for(String s : attributes.keySet()){
-			res += s + ":" + getString(attributes.get(s)) + "\n";
-		}
-		return res;
+		if(!attributes.isEmpty()){
+			String res = "{";
+			for(String s : attributes.keySet()){
+				res += s + ":" + getString(attributes.get(s)) + " ";
+			}
+			res = res.substring(0, res.length()-1) + "} ";
+			return res;
+		} else return "";
 	}
 	
 	@Override
 	public String toString(){
-		String res = this.at();
+		String res = this.id + " " + this.at();
 		for(Object o: elements){
-			res += getString(o) + "\n";
+			res += getString(o) + " ";
 		}
 		return res;
 	}

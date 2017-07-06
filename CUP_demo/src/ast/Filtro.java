@@ -6,7 +6,7 @@ public class Filtro extends Expresion{
 
 	Nodo n;
 
-	public Filtro(Nodo n,String filtro){
+	public Filtro(Expresion e,String filtro){
 		n = new Nodo("$");
 		boolean regex = filtro.substring(0,1).equals("~");
 		if(regex){
@@ -16,7 +16,7 @@ public class Filtro extends Expresion{
 		if(filtro.substring(0,1).equals("\"")){
 			filtro = filtro.substring(1,filtro.length()); 
 		}
-		eval(n, filtro, regex);
+		eval(e.getNodo(), filtro, regex);
 	}
 
 	public void eval(Nodo n, String filtro, boolean regex){

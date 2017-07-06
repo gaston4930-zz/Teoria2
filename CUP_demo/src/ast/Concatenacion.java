@@ -3,11 +3,9 @@ package ast;
 import java.util.ArrayList;
 
 public class Concatenacion extends Expresion{
-
-	Nodo n;
 	
 	public Concatenacion(Expresion left, Expresion right){
-		n = new Nodo("$");
+		super();
 		eval(left.getNodo(),right.getNodo());
 	}
 	

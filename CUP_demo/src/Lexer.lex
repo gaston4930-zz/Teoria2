@@ -12,22 +12,28 @@ import java_cup.runtime.Symbol;
 
 %{
 	/* Embedded lexer class code */
+	
+	public Float inf(String text){
+		if(text.substring(0,1).equals("-")){
+			return Float.NEGATIVE_INFINITY;
+		} else return Float.POSITIVE_INFINITY;
+	}
 %}
 
 %% 
 // Tokens.
 
 (true|false|\u22A4|\u22A5) { return new Symbol(bool, yytext() == "true"); }
-([A-Za-z][a-zA-Z0-9]*|\"[A-Za-z][a-zA-Z0-9.]*\") { return new Symbol(fil, yytext()); }
 [A-Za-z][a-zA-Z0-9.]* { return new Symbol(id, yytext()); }
 \"([^\"\n\\]|\\[^\n])*\" { return new Symbol(str, yytext()); }
+([A-Za-z][a-zA-Z0-9]*|\"[A-Za-z][a-zA-Z0-9.]*\") { return new Symbol(fil, yytext()); }
 [-+]?[0-9]+(\.[0-9]+)? { return new Symbol(num, Float.parseFloat(yytext())); }
 \( { return new Symbol(P1); }
 \) { return new Symbol(P2); }
 : { return new Symbol(COLON); }
 , { return new Symbol(COMMA); }
 \n { return new Symbol(EOL); }
--?\u221e { return new Symbol(INF); }
+-?\u221e { return new Symbol(num, inf(yytext())); }
 
 (&|\u2229) { return new Symbol(INTERSECCION); }
 (\||\u222A) { return new Symbol(UNION);}

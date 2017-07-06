@@ -7,10 +7,8 @@ import java.util.Set;
 
 public class Interseccion extends Expresion{
 
-	Nodo n;
-	
 	public Interseccion(Expresion left, Expresion right){
-		n = new Nodo("$");
+		super();
 		eval(left.getNodo(), right.getNodo());
 	}
 	

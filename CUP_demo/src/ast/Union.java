@@ -1,13 +1,12 @@
 package ast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Union extends Expresion{
 
-	Nodo n;
-	
 	public Union(Expresion e1, Expresion e2){
-		n = new Nodo("$");
+		super();
 		eval(e1.getNodo(),e2.getNodo());
 	}
 	
@@ -23,9 +22,9 @@ public class Union extends Expresion{
 		n.addList(left);
 		n.addList(right);
 		ArrayList<Object> resultado = n.getElements();
-		
 		for(int i =0;i<resultado.size();i++){
-			if(resultado.subList(i+1, resultado.size()-1).contains(resultado.get(i))){
+			List<Object> sub = resultado.subList(i+1, resultado.size());
+			if(sub.contains(resultado.get(i))){
 				resultado.remove(i);
 			}
 		}

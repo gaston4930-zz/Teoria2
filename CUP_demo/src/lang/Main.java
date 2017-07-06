@@ -37,13 +37,9 @@ public class Main {
 	public static void showParse(String input) throws Exception {
 		Parser parser = Parser.makeParser(input);
 		Symbol result = parser.parse();
-		//System.out.println(result.sym +": "+ result.value);
-		Nodo o = (Nodo) result.value;
-		for(Object o1: o.getElements()){
-			Nodo obj = ((Nodo) o1);
-			System.out.println("Objeto: " + obj.getId());
-			System.out.println(obj.toString());
-		}
+		System.out.println(result.sym +": "+ result.value);
+		Nodo n =  (Nodo) ((Expresion)result.value).getNodo();
+		System.out.println(n);
 	}
 	
 	public static void main(String[] args) throws Exception {
