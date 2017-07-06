@@ -38,9 +38,9 @@ public class Main {
 		Parser parser = Parser.makeParser(input);
 		Symbol result = parser.parse();
 		//System.out.println(result.sym +": "+ result.value);
-		Objeto o = (Objeto) result.value;
+		Nodo o = (Nodo) result.value;
 		for(Object o1: o.getElements()){
-			Objeto obj = ((Objeto) o1);
+			Nodo obj = ((Nodo) o1);
 			System.out.println("Objeto: " + obj.getId());
 			System.out.println(obj.toString());
 		}

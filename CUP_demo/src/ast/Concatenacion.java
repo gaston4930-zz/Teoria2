@@ -4,27 +4,18 @@ import java.util.ArrayList;
 
 public class Concatenacion extends Expresion{
 
-	Expresion e1,e2;
-	ArrayList<Object> resultado;	
+	Nodo n;
 	
-	public Concatenacion(Expresion e1, Expresion e2){
-		this.e1 = e1;
-		this.e2 = e2;
-		resultado = new ArrayList<Object>();
+	public Concatenacion(Expresion left, Expresion right){
+		n = new Nodo("$");
+		eval(left.getNodo(),right.getNodo());
 	}
 	
-	public void eval(){
-						
-		/*for(Objeto o1 : l1){
-			resultado.add(o1);
-		}
-		
-		for(Objeto o2 : l2){
-			resultado.add(o2);
-		}*/
-		
-		resultado.addAll(e1.getExpresion());
-		resultado.addAll(e2.getExpresion());
+	public void eval(Nodo left, Nodo right){
+		n.addList(left);
+		n.addList(right);
+//		resultado.addAll(left.getExpresion());
+//		resultado.addAll(right.getExpresion());
 	}
 	
 }

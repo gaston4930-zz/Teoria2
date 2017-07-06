@@ -4,13 +4,11 @@ import java.util.ArrayList;
 
 public class Filtro extends Expresion{
 
-	Expresion expression;
-	boolean regex = true;
-	String filtro;
+	Nodo n;
 
-	public Filtro(Expresion expression,String filtro){
-		this.expression = expression;
-		this.regex = filtro.substring(0,1).equals("~");
+	public Filtro(Nodo n,String filtro){
+		n = new Nodo("$");
+		boolean regex = filtro.substring(0,1).equals("~");
 		if(regex){
 			filtro = filtro.substring(1);
 		}
@@ -18,25 +16,24 @@ public class Filtro extends Expresion{
 		if(filtro.substring(0,1).equals("\"")){
 			filtro = filtro.substring(1,filtro.length()); 
 		}
-		this.filtro = filtro;
+		eval(n, filtro, regex);
 	}
 
-	public ArrayList<Object> eval(){
-		ArrayList<Object> resultado = new ArrayList<Object>();
-			for(Object o : expression.getExpresion()){
-				if( o instanceof Objeto){
-					if(regex){
-						if(((Objeto) o).getId().matches(filtro)){
-							resultado.add(o);
-						}
-					}else{
-						if(((Objeto) o).getId().equals(filtro)){
-							resultado.add(o);
-						}
+	public void eval(Nodo n, String filtro, boolean regex){
+		//Solo se buscan Objetos, el resto no tiene tags
+		for(Object o: n.getElements()){
+			if(o instanceof Nodo){
+				if(regex){
+					if(((Nodo) o).getId().matches(filtro)){
+						this.n.addElem(o);
+					}
+				} else{
+					if(((Nodo) o).getId().equals(filtro)){
+						this.n.addElem(o);
 					}
 				}
 			}
-		return resultado;
+		}
 	}
 
 }

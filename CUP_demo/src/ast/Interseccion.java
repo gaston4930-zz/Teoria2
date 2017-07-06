@@ -1,30 +1,28 @@
 package ast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 public class Interseccion extends Expresion{
-	Expresion e1,e2;
-	ArrayList<Object> resultado;	
+
+	Nodo n;
 	
-	public Interseccion(Expresion e1, Expresion e2){
-		this.e1 = e1;
-		this.e2 = e2;
-		resultado = new ArrayList<Object>();
+	public Interseccion(Expresion left, Expresion right){
+		n = new Nodo("$");
+		eval(left.getNodo(), right.getNodo());
 	}
 	
-	public void eval(){
-						
-		/*for(Objeto o1 : l1){
-			resultado.add(o1);
+	public void eval(Nodo left, Nodo right){
+		for(Object o: left.getElements()){
+			if(right.getElements().contains(o)){
+				n.addElem(o);
+			}
 		}
-		
-		for(Objeto o2 : l2){
-			resultado.add(o2);
-		}*/
-		
-		for(Object o : e1.getExpresion()){
-			if(e2.getExpresion().contains(o)){
-				resultado.add(o);
+		for(String s: left.getAttributes().keySet()){
+			if(right.getAttributes().containsKey(s)){
+				n.addAttr(s, left.getAttributes().get(s));
 			}
 		}
 	}

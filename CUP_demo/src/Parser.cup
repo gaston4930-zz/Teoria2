@@ -35,25 +35,25 @@ terminal String str;
 terminal Boolean bool;
 terminal String fil;
 
-non terminal Objeto obj;
-non terminal Objeto lista;
-non terminal Objeto root;
+non terminal Nodo obj;
+non terminal Nodo lista;
+non terminal Nodo root;
 
 
 non terminal Object valor;
 
 non terminal Expresion expresion;
 
-root ::= obj:o EOL {: RESULT = new Objeto("root"); RESULT.addElem(o); :}
+root ::= obj:o EOL {: RESULT = new Nodo("root"); RESULT.addElem(o); :}
 		| root:r obj:o EOL {: RESULT = r; RESULT.addElem(o); :}
 		;
 obj ::= id:tag P1 lista:l P2 
 			{: RESULT = l; RESULT.setTag(tag); :}
-		| id:tag P1 P2 {: RESULT = new Objeto(); RESULT.setTag(tag); :}
+		| id:tag P1 P2 {: RESULT = new Nodo(); RESULT.setTag(tag); :}
 		;
 lista ::= id:i COLON valor:v 
-			{: RESULT = new Objeto(); RESULT.addAttr(i,v); :}
-		| valor:v {: RESULT = new Objeto(); RESULT.addElem(v); :}
+			{: RESULT = new Nodo(); RESULT.addAttr(i,v); :}
+		| valor:v {: RESULT = new Nodo(); RESULT.addElem(v); :}
 		| lista:l COMMA id:i COLON valor:v
 			{: RESULT = l; RESULT.addAttr(i,v); :}
 		| lista:l COMMA valor:v 
@@ -66,7 +66,7 @@ valor ::= bool:b {: RESULT = b; :}
 		;
 		
 expresion ::= valor:v {: RESULT = new Expresion(v); :}
-			| P1 expresion:e1 P2 {: RESULT = e1; :}	//No le gusta esta línea con P1 y P2
+			| P1 expresion:e1 P2 {: RESULT = e1; :}	//No le gusta esta lï¿½nea con P1 y P2
 			| expresion:e1 INTERSECCION expresion:e2 
 				{: RESULT = new Interseccion(e1,e2); :}
 			| expresion:e1 UNION expresion:e2 

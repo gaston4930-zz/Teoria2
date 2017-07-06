@@ -4,17 +4,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Objeto {
+public class Nodo {
 	String id;
 	Map<String,Object> attributes;
 	ArrayList<Object> elements;
 
-	public Objeto(){
+	public Nodo(){
 		elements = new ArrayList<Object>();
 		attributes = new HashMap<String,Object>();
 	}
 	
-	public Objeto(String str){
+	public Nodo(String str){
 		id = str;
 		elements = new ArrayList<Object>();
 		attributes = new HashMap<String,Object>();
@@ -27,12 +27,18 @@ public class Objeto {
 		elements.add(elem);
 	}
 	
+	public void addList(Nodo n){
+		// Agrega todos los elementos y atributos
+		this.elements.addAll(n.getElements());
+		this.attributes.putAll(n.getAttributes());
+	}
+	
 	public void setTag(String str){
 		id = str;
 	}
 	
 	public String getString(Object o){
-		if(o instanceof Objeto) return ((Objeto) o).id;
+		if(o instanceof Nodo) return ((Nodo) o).id;
 		else if(o instanceof String) return ((String) o);
 		else if(o instanceof Float) return String.valueOf((Float) o);
 		else if(o instanceof Boolean) return String.valueOf((Boolean) o);
@@ -58,6 +64,10 @@ public class Objeto {
 	
 	public ArrayList<Object> getElements(){
 		return elements;
+	}
+	
+	public Map<String,Object> getAttributes(){
+		return attributes;
 	}
 	
 	public String getId() { return id; }

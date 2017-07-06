@@ -4,33 +4,25 @@ import java.util.ArrayList;
 
 public class Diferencia extends Expresion{
 
-	Expresion e1,e2;
-	ArrayList<Object> resultado;	
+	Nodo n;
 	
-	public Diferencia(Expresion e1, Expresion e2){
-		this.e1 = e1;
-		this.e2 = e2;
-		resultado = new ArrayList<Object>();
+	public Diferencia(Expresion left, Expresion right){
+		n = new Nodo("$");
+		eval(left.getNodo(),right.getNodo());
 	}
 	
-	public void eval(){
-						
-		/*for(Objeto o1 : l1){
-			resultado.add(o1);
-		}
+	public void eval(Nodo left, Nodo right){
+		n.elements.addAll(left.elements);
+		n.elements.removeAll(right.elements);
 		
-		for(Objeto o2 : l2){
-			resultado.add(o2);
-		}*/
-		
-		resultado.addAll(e1.getExpresion());
-		resultado.removeAll(e2.getExpresion());
-		
-		for(int i =0;i<resultado.size();i++){
-			if(resultado.subList(i+1, resultado.size()-1).contains(resultado.get(i))){
-				resultado.remove(i);
+		for(int i =0;i<n.elements.size();i++){
+			if(n.elements.subList(i+1, n.elements.size()-1).contains(n.elements.get(i))){
+				n.elements.remove(i);
 			}
 		}
+		
+		n.attributes.putAll(left.attributes);
+		n.attributes.keySet().removeAll(right.attributes.keySet());
 	}
 		
 	
