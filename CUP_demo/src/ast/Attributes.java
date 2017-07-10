@@ -9,6 +9,6 @@ public class Attributes extends Expresion{
 	
 	public void eval(Nodo nodo){
 		System.out.println(nodo);
-		n.attributes.putAll(nodo.attributes);
+		n.attributes.addAll(nodo.attributes);
 	}
 }

@@ -23,10 +23,10 @@ import java_cup.runtime.Symbol;
 %% 
 // Tokens.
 
-(true|false|\u22A4|\u22A5) { return new Symbol(bool, yytext() == "true"); }
-[A-Za-z][a-zA-Z0-9.]* { return new Symbol(id, yytext()); }
+\$ { return new Symbol(PESOS); }
+(true|false|\u22A4|\u22A5) { return new Symbol(bool, yytext().matches("\u22A4|true")); }
 \"([^\"\n\\]|\\[^\n])*\" { return new Symbol(str, yytext()); }
-([A-Za-z][a-zA-Z0-9]*|\"[A-Za-z][a-zA-Z0-9.]*\") { return new Symbol(fil, yytext()); }
+([A-Za-z][a-zA-Z0-9]*|\'[A-Za-z][a-zA-Z0-9.]*\') { return new Symbol(id, yytext()); }
 [-+]?[0-9]+(\.[0-9]+)? { return new Symbol(num, Float.parseFloat(yytext())); }
 \( { return new Symbol(P1); }
 \) { return new Symbol(P2); }

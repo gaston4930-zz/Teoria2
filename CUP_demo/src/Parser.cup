@@ -6,7 +6,15 @@ import java_cup.runtime.Symbol;
 import ast.*;
 
 parser code {:
+
+	Expresion exp;
 	
+	public void setExpresion(Expresion exp){ this.exp = exp; }
+	public Expresion getExpresion(){
+		if(exp == null) return new Expresion();
+		else return exp; 
+	}
+		
 	public static Lexer makeLexer(String input) throws Exception {
 		return new Lexer(new StringReader(input));
 	}
@@ -29,6 +37,7 @@ terminal P1, P2, COLON, COMMA, EOL;
 terminal INTERSECCION, UNION,
 		 CONCATENACION, DIFERENCIA,
 		 FILTRO, ATTRIBUTES, ELEMENTS;
+terminal PESOS;
 terminal Float num;
 terminal String id;
 terminal String str;
@@ -49,6 +58,7 @@ precedence left UNION, CONCATENACION,
 precedence left P1, P2;
 
 root ::= expresion:e EOL {: RESULT = e; :}
+		| root:r expresion:e EOL {: RESULT = e; :}
 		;
 obj ::= id:tag P1 lista:l P2 
 			{: RESULT = l; RESULT.setTag(tag); :}
@@ -66,22 +76,23 @@ valor ::= bool:b {: RESULT = b; :}
 		| num:n {: RESULT = n; :}
 		| str:s {: RESULT = s; :}
 		| obj:o {: RESULT = o; :}
+		| PESOS {: RESULT = parser.getExpresion().getNodo(); :}
 		;
 		
-expresion ::= valor:v {: RESULT = new Expresion(v); :}
-			| P1 expresion:e1 P2 {: RESULT = e1; :}	//No le gusta esta l�nea con P1 y P2
+expresion ::= valor:v {: RESULT = new Expresion(v); parser.setExpresion(RESULT); :}
+			| P1 expresion:e1 P2 {: RESULT = e1; parser.setExpresion(RESULT); :}	//No le gusta esta l�nea con P1 y P2
 			| expresion:e1 INTERSECCION expresion:e2 
-				{: RESULT = new Interseccion(e1,e2); :}
+				{: RESULT = new Interseccion(e1,e2); parser.setExpresion(RESULT); :}
 			| expresion:e1 UNION expresion:e2 
-				{: RESULT = new Union(e1,e2); :}
+				{: RESULT = new Union(e1,e2); parser.setExpresion(RESULT); :}
 			| expresion:e1 CONCATENACION expresion:e2
-				{: RESULT = new Concatenacion(e1,e2); :}
+				{: RESULT = new Concatenacion(e1,e2); parser.setExpresion(RESULT); :}
 			| expresion:e1 DIFERENCIA expresion:e2
-				{: RESULT = new Diferencia(e1,e2); :}
-			| expresion:e FILTRO fil:f 
-				{: RESULT = new Filtro(e,f); :}
+				{: RESULT = new Diferencia(e1,e2); parser.setExpresion(RESULT); :}
+			| expresion:e FILTRO id:i 
+				{: RESULT = new Filtro(e,i); parser.setExpresion(RESULT); :}
 			| expresion:e ATTRIBUTES 
-				{: RESULT = new Attributes(e); :}
+				{: RESULT = new Attributes(e); parser.setExpresion(RESULT); :}
 			| expresion:e ELEMENTS
-				{: RESULT = new Elements(e); :}
+				{: RESULT = new Elements(e); parser.setExpresion(RESULT); :}
 			;

@@ -12,25 +12,38 @@ public class Union extends Expresion{
 	
 	public void eval(Nodo left, Nodo right){
 						
-		/*for(Objeto o1 : l1){
-			resultado.add(o1);
-		}
-		
-		for(Objeto o2 : l2){
-			resultado.add(o2);
-		}*/
 		n.addList(left);
 		n.addList(right);
-		ArrayList<Object> resultado = n.getElements();
+		
+		/*ArrayList<Object> resultado = n.getElements();
 		for(int i =0;i<resultado.size();i++){
 			List<Object> sub = resultado.subList(i+1, resultado.size());
 			if(sub.contains(resultado.get(i))){
 				resultado.remove(i);
 			}
+		}*/
+		
+		for(int i=0;i<n.elements.size();i++){
+			if(n.elements.subList(i+1, n.elements.size()).contains(n.elements.get(i))){
+				n.elements.remove(i);
+				i--;
+			}
 		}
 		
-		//Falta sacar los duplicados del HashMap
-
+		/*ArrayList<NodoKV> res = n.getattributes();
+		for(int i=0;i<res.size();i++){
+			List<NodoKV> sub = res.subList(i+1, res.size());
+			if(sub.contains(res.get(i))){
+				res.remove(i);
+			}
+		}*/
+		
+		for(int i=0;i<n.attributes.size();i++){
+			if(n.attributes.subList(i+1, n.attributes.size()).contains(n.attributes.get(i))){
+				n.attributes.remove(i);
+				i--;
+			}
+		}
 	}	
 
 }

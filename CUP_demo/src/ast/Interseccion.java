@@ -18,11 +18,26 @@ public class Interseccion extends Expresion{
 				n.addElem(o);
 			}
 		}
-		for(String s: left.getAttributes().keySet()){
-			if(right.getAttributes().containsKey(s)){
-				n.addAttr(s, left.getAttributes().get(s));
+		
+		for(int i=0;i<n.elements.size();i++){
+			if(n.elements.subList(i+1, n.elements.size()).contains(n.elements.get(i))){
+				n.elements.remove(i);
+				i--;
 			}
 		}
+		
+		for(NodoKV s: left.getattributes()){
+			if(right.getAttributeKeys().contains(s.key)){
+				n.addAttr(s.key, s.value);
+			}
+		}
+		
+		/*for(int i=0;i<n.attributes.size();i++){
+			if(n.attributes.subList(i+1, n.attributes.size()).contains(n.attributes.get(i))){
+				n.attributes.remove(i);
+				i--;
+			}
+		}*/
 	}
 
 	
