@@ -4,8 +4,6 @@ import java.util.ArrayList;
 
 public class Filtro extends Expresion{
 
-	Nodo n;
-
 	public Filtro(Expresion e,String filtro){
 		n = new Nodo("$");
 		if(filtro.substring(0,1).equals("\'")){

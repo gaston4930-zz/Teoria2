@@ -1,7 +1,6 @@
 package ast;
 
 public class Regex extends Expresion{
-	Nodo n;
 
 	public Regex(Expresion e,String filtro){
 		n = new Nodo("$");
