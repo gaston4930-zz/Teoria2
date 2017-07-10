@@ -1,12 +1,9 @@
 package ast;
 
-import java.util.ArrayList;
-
-public class Filtro extends Expresion{
-
+public class Regex extends Expresion{
 	Nodo n;
 
-	public Filtro(Expresion e,String filtro){
+	public Regex(Expresion e,String filtro){
 		n = new Nodo("$");
 		if(filtro.substring(0,1).equals("\'")){
 			filtro = filtro.substring(1,filtro.length()); 
@@ -18,7 +15,7 @@ public class Filtro extends Expresion{
 		//Solo se buscan Objetos, el resto no tiene tags
 		for(Object o: n.getElements()){
 			if(o instanceof Nodo){
-				if(((Nodo) o).getId().equals(filtro)){
+				if(((Nodo) o).getId().matches(filtro)){
 					this.n.addElem(o);
 				}
 			}

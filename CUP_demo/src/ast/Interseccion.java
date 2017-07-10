@@ -31,13 +31,6 @@ public class Interseccion extends Expresion{
 				n.addAttr(s.key, s.value);
 			}
 		}
-		
-		/*for(int i=0;i<n.attributes.size();i++){
-			if(n.attributes.subList(i+1, n.attributes.size()).contains(n.attributes.get(i))){
-				n.attributes.remove(i);
-				i--;
-			}
-		}*/
 	}
 
 	

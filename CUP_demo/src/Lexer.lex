@@ -39,7 +39,7 @@ import java_cup.runtime.Symbol;
 (\||\u222A) { return new Symbol(UNION);}
 \+ { return new Symbol(CONCATENACION); }
 \- { return new Symbol(DIFERENCIA); }
-\~.+ { return new Symbol(FILTRO); }
+\~ { return new Symbol(FILTRO); }
 \. { return new Symbol(ATTRIBUTES); }
 \/ { return new Symbol(ELEMENTS); }
 

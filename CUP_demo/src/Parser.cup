@@ -89,8 +89,10 @@ expresion ::= valor:v {: RESULT = new Expresion(v); parser.setExpresion(RESULT);
 				{: RESULT = new Concatenacion(e1,e2); parser.setExpresion(RESULT); :}
 			| expresion:e1 DIFERENCIA expresion:e2
 				{: RESULT = new Diferencia(e1,e2); parser.setExpresion(RESULT); :}
-			| expresion:e FILTRO id:i 
+			| expresion:e id:i 
 				{: RESULT = new Filtro(e,i); parser.setExpresion(RESULT); :}
+			| expresion:e FILTRO id:i
+				{: RESULT = new Regex(e,i); parser.setExpresion(RESULT); :}
 			| expresion:e ATTRIBUTES 
 				{: RESULT = new Attributes(e); parser.setExpresion(RESULT); :}
 			| expresion:e ELEMENTS
