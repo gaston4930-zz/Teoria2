@@ -43,6 +43,7 @@ import java_cup.runtime.Symbol;
 \. { return new Symbol(ATTRIBUTES); }
 \/ { return new Symbol(ELEMENTS); }
 
+(\/\*([^\/])*\*\/)+ { return new Symbol(return new Symbol(id, yytext());) }
 
 \/\/.* {}
 [ \r\t]+ {}
