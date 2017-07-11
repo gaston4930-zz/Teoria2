@@ -18,7 +18,7 @@ public class BasicTests extends TestCase {
 		diferencia();		
 		union();
 		concatenacion();
-		//interseccion();
+		interseccion();
 		parentesis();
 		//filtro();	//Terminar
 		punto();
@@ -97,9 +97,9 @@ public class BasicTests extends TestCase {
 				n.setTag("$");
 				n.addElem((float)1.0);
 				n.addElem(true);
-				n.addElem("algo");
+				n.addElem("\"algo\"");
 				d = (Diferencia)Parser.parseString("Object(1,true,false,\"algo\")-Object(false)\n");
-				//assertEquals(d.getNodo(),n);	//TODO Corregir "
+				assertEquals(d.getNodo(),n);
 				
 				n = new Nodo();
 				n.setTag("$");
@@ -146,7 +146,7 @@ public class BasicTests extends TestCase {
 				n.setTag("$");
 				n.addAttr("id", "\"algo\"");
 				d = (Diferencia)Parser.parseString("Object(id:\"algo\")-Object(id:2)\n");
-				assertEquals(d.getNodo(),n);	//TODO Arreglar "
+				assertEquals(d.getNodo(),n);	
 				
 				n = new Nodo();
 				n.setTag("$");
@@ -339,9 +339,10 @@ public class BasicTests extends TestCase {
 				n.setTag("$");
 				n.addElem((float)1.0);
 				n.addElem(true);
-				n.addElem("algo");
+				n.addElem("\"algo\"");
+				n.addElem(false);
 				u =  (Union)Parser.parseString("Object(1,true,false,\"algo\")|Object(false)\n");
-				//assertEquals(u.getNodo(),n);	//TODO Corregir "
+				assertEquals(u.getNodo(),n);	
 				
 				n = new Nodo();
 				n.setTag("$");
@@ -357,8 +358,10 @@ public class BasicTests extends TestCase {
 				n1.addElem((float)4);
 				n1.addElem((float)5);
 				n.addElem(n1);
+				Nodo n2= new Nodo("SubList");
+				n.addElem(n2);
 				u =  (Union)Parser.parseString("List(SubList(1,2,3,4,5))|List(SubList())\n");
-				//assertEquals(u.getNodo(),n);	//TODO REVISAR
+				assertEquals(u.getNodo(),n);
 				
 				//Union Elementos | FIN
 				
@@ -381,7 +384,7 @@ public class BasicTests extends TestCase {
 				n.addAttr("id", "\"algo\"");
 				n.addAttr("id", (float)2);
 				u =  (Union)Parser.parseString("Object(id:\"algo\")|Object(id:2)\n");
-				assertEquals(u.getNodo(),n);	//TODO Arreglar "
+				assertEquals(u.getNodo(),n);	
 				
 				n = new Nodo();
 				n.setTag("$");
@@ -435,7 +438,7 @@ public class BasicTests extends TestCase {
 				n.addAttr("id","\"l1\"");
 				n.addAttr("id", "\"l2\"");
 				n.addElem(n1);
-				Nodo n2 = new Nodo("SubList");
+				n2 = new Nodo("SubList");
 				n2.addElem((float)1);
 				n2.addElem((float)3);
 				n2.addElem((float)5);
@@ -620,9 +623,11 @@ public class BasicTests extends TestCase {
 				n.setTag("$");
 				n.addElem((float)1.0);
 				n.addElem(true);
-				n.addElem("algo");
+				n.addElem(false);
+				n.addElem("\"algo\"");
+				n.addElem(false);
 				c =  (Concatenacion)Parser.parseString("Object(1,true,false,\"algo\")+Object(false)\n");
-				//assertEquals(u.getNodo(),n);	//TODO Corregir "
+				assertEquals(c.getNodo(),n);	
 				
 				n = new Nodo();
 				n.setTag("$");
@@ -638,8 +643,9 @@ public class BasicTests extends TestCase {
 				n1.addElem((float)4);
 				n1.addElem((float)5);
 				n.addElem(n1);
+				n.addElem(new Nodo("SubList"));
 				c =  (Concatenacion)Parser.parseString("List(SubList(1,2,3,4,5))+List(SubList())\n");
-				//assertEquals(u.getNodo(),n);	//TODO REVISAR
+				assertEquals(c.getNodo(),n);	
 				
 				//Concatenacion Elementos + FIN
 				
@@ -663,7 +669,7 @@ public class BasicTests extends TestCase {
 				n.addAttr("id", "\"algo\"");
 				n.addAttr("id", (float)2);
 				c =  (Concatenacion)Parser.parseString("Object(id:\"algo\")+Object(id:2)\n");
-				assertEquals(c.getNodo(),n);	//TODO Arreglar "
+				assertEquals(c.getNodo(),n);	
 				
 				n = new Nodo();
 				n.setTag("$");
@@ -881,7 +887,7 @@ public class BasicTests extends TestCase {
 				n.setTag("$");
 				n.addElem(false);
 				i =  (Interseccion)Parser.parseString("Object(1,true,false,\"algo\")&Object(false)\n");
-				//assertEquals(u.getNodo(),n);	//TODO Corregir "
+				assertEquals(i.getNodo(),n);	
 				
 				n = new Nodo();
 				n.setTag("$");
@@ -891,7 +897,7 @@ public class BasicTests extends TestCase {
 				n = new Nodo();
 				n.setTag("$");
 				i =  (Interseccion)Parser.parseString("List(SubList(1,2,3,4,5))&List(SubList())\n");
-				//assertEquals(u.getNodo(),n);	//TODO REVISAR
+				assertEquals(i.getNodo(),n);	
 				
 				//Interseccion Elementos & FIN
 				
@@ -905,17 +911,17 @@ public class BasicTests extends TestCase {
 				n = new Nodo();
 				n.setTag("$");
 				i =  (Interseccion)Parser.parseString("Object(id:1)&Object(id:2)\n");
-				//assertEquals(i.getNodo(),n);	//TODO ERROR GRAVE
+				assertEquals(i.getNodo(),n);	//TODO ERROR GRAVE
 				
 				n = new Nodo();
 				n.setTag("$");
 				i =  (Interseccion)Parser.parseString("Object(id:\"algo\")&Object(id:2)\n");
-				//assertEquals(i.getNodo(),n);	//TODO Arreglar "
+				assertEquals(i.getNodo(),n);	//TODO Arreglar "
 				
 				n = new Nodo();
 				n.setTag("$");
 				i =  (Interseccion)Parser.parseString("Object(id:1, label:\"algo\")&Object(id:2)\n");
-				//assertEquals(i.getNodo(),n);
+				assertEquals(i.getNodo(),n);
 				
 				n = new Nodo();
 				n.setTag("$");
@@ -1131,7 +1137,7 @@ public class BasicTests extends TestCase {
 		Nodo n = new Nodo();
 		n.setTag("$");
 		Elements e =  (Elements)Parser.parseString("List(id:0)/\n");
-		assertEquals(e.getNodo(),n);	//TODO Revisar
+		assertEquals(e.getNodo(),n);	
 		
 		n = new Nodo();
 		n.setTag("$");
